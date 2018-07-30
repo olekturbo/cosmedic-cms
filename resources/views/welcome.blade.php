@@ -13,10 +13,11 @@
     <link rel="stylesheet" type="text/css" href="public/plugins/OwlCarousel2-2.2.1/animate.css">
     <link rel="stylesheet" type="text/css" href="public/styles/main_styles.css">
     <link rel="stylesheet" type="text/css" href="public/styles/responsive.css">
+    <link rel="icon" type="image/png" href="{{ asset('public/images/favicon.png') }}" />
 </head>
 <body>
+<div class="super_container" style="display: none">
 
-<div class="super_container">
 
     <!-- Header -->
 
@@ -28,7 +29,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
-                            <div class="emergencies  d-flex flex-row align-items-center justify-content-start ml-auto"><i class="fa fa-phone" style="padding-right: 5px;"></i> +48 456 789 456</div>
+                            <div class="emergencies  d-flex flex-row align-items-center justify-content-start ml-auto"><i class="fa fa-phone" style="padding-right: 5px;"></i> +48 602 150 345</div>
                         </div>
                     </div>
                 </div>
@@ -80,11 +81,24 @@
     </header>
 
     <!-- Side navigation -->
+    @if (session('success'))
+        <div class="sidenav-msg">
+            <div class="alert alert-success mb-5" id="success" style="display: none">
+                <p style="color: #155724">{{ session('success') }}</p>
+            </div>
+        </div>
+    @endif
+
+    @if ($errors->has('g-recaptcha-response'))
+        <div class="sidenav-msg">
+            <div class="alert alert-danger mb-5" id="success" style="display: none">
+                <p style="color: #721c24">{{ $errors->first('g-recaptcha-response') }}</p>
+            </div>
+        </div>
+    @endif
     <div class="sidenav">
-        <a class="mb-1" data-toggle="tooltip" data-placement="right" title="Facebook" style="background: #3b5998" href="#"><i class="fab fa-facebook-f" style="color: #ffffff; padding-left: 2px;"></i> </a>
-        <a class="mb-1" data-toggle="tooltip" data-placement="right" title="Instagram" style="background: #fd1d1d;" href="#"><i class="fab fa-instagram" style="color: #ffffff;"></i> </a>
-        <a class="mb-1" data-toggle="tooltip" data-placement="right" title="Linkedin" style="background: #0077b5; " href="#"><i class="fab fa-linkedin-in" style="color: #ffffff;"></i> </a>
-        <a data-toggle="tooltip" data-placement="right" title="Snapchat" style="background: #ffc024; " href="#"><i class="fab fa-snapchat-ghost" style="color: #ffffff;"></i> </a>
+        <a class="mb-1" data-toggle="tooltip" data-placement="right" title="Facebook" style="background: #3b5998" href="https://www.facebook.com/Cosmedic-1687449134875963/"><i class="fab fa-facebook-f" style="color: #ffffff; padding-left: 2px;"></i> </a>
+        <a class="mb-1" data-toggle="tooltip" data-placement="right" title="Instagram" style="background: #fd1d1d;" href="https://www.instagram.com/cosmedic_przasnysz/"><i class="fab fa-instagram" style="color: #ffffff;"></i> </a>
     </div>
 
     <!-- Menu -->
@@ -119,16 +133,13 @@
             <div class="owl-carousel owl-theme home_slider">
                 <!-- Slider Item -->
                 <div class="owl-item">
-                    <div class="home_slider_background" style="background-image:url(public/images/home_background_1.jpg)"></div>
+                    <div class="home_slider_background" style="background-image:url({{ asset('public/images/slider.jpg') }})"></div>
                     <div class="home_content">
                         <div class="container">
                             <div class="row">
                                 <div class="col">
                                     <div class="home_content_inner">
-                                        <div class="home_title"><h1>Nie zapominaj o medycynie</h1></div>
-                                        <div class="home_text">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris quis aliquam. Integer accumsan sodales odio, id tempus velit ullamcorper id. Quisque at erat eu.</p>
-                                        </div>
+                                        <div class="home_title"><h1>Odkryj swoje piękno</h1></div>
                                         <div class="button home_button">
                                             <a href="#about">czytaj więcej</a>
                                         </div>
@@ -157,15 +168,15 @@
                             <ul>
                                 <li class="d-flex flex-row align-items-center justify-content-start">
                                     <div>Poniedziałek - Piątek</div>
-                                    <div class="ml-auto">8.00 – 19.00</div>
+                                    <div class="ml-auto">9.00 – 20.00</div>
                                 </li>
                                 <li class="d-flex flex-row align-items-center justify-content-start">
                                     <div>Sobota</div>
-                                    <div class="ml-auto">9.30 – 17.00</div>
+                                    <div class="ml-auto">9.00 – 14.00</div>
                                 </li>
                                 <li class="d-flex flex-row align-items-center justify-content-start">
                                     <div>Niedziela</div>
-                                    <div class="ml-auto">9.30 – 15.00</div>
+                                    <div class="ml-auto">nieczynne</div>
                                 </li>
                             </ul>
                         </div>
@@ -177,7 +188,7 @@
                     <div class="box box_appointments">
                         <div class="box_icon d-flex flex-column align-items-start justify-content-center"><div style="width: 29px; height:29px;"><img src="public/images/phone-call.svg" alt=""></div></div>
                         <div class="box_title">Wizyty</div>
-                        <div class="box_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ante leo, finibus quis est ut, tempor tincidunt ipsum. Nam cons equat semper sollicitudin.</div>
+                        <div class="box_text">Po wcześniejszym uzgodnieniu możliwość wyboru innej godziny.</div>
                     </div>
                 </div>
 
@@ -186,8 +197,8 @@
                     <div class="box box_emergency">
                         <div class="box_icon d-flex flex-column align-items-start justify-content-center"><div style="width: 37px; height:37px; margin-left:-4px;"><img src="public/images/bell.svg" alt=""></div></div>
                         <div class="box_title">Kontakt</div>
-                        <div class="box_phone">+48 456 789 456</div>
-                        <div class="box_emergency_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ante leo.</div>
+                        <div class="box_phone"><i class="fa fa-mobile"></i> +48 602 150 345</div>
+                        <div class="box_phone"><i class="fa fa-phone"></i> 29 643 12 25</div>
                     </div>
                 </div>
 
@@ -204,9 +215,11 @@
                 <!-- About Content -->
                 <div class="col-lg-7">
                     <div class="about_content">
-                        <div class="section_title"><h2>Nasi specjaliści spełnią wszystkie Twoje potrzeby</h2></div>
+                        <div class="section_title"><h2>Cosmedic</h2></div>
                         <div class="about_text">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ante leo, finibus quis est ut, tempor tincidunt ipsum. Nam consequat semper sollicitudin. Aliquam nec dapibus massa. Pellen tesque in luctus ex. Praesent luctus erat sit amet tortor aliquam bibendum. Nulla ut molestie augue, scelerisque consectetur quam. Dolor sit amet, consectetur adipiscing elit. Cura bitur ante leo, finibus quis est ut, tempor tincidunt ipsum. Nam consequat semper sollicitudin. Aliquam nec dapibus massa. Pellentesque in luctus ex.</p>
+                            <p>
+                                Cosmedic to nowoczesny gabinet kosmetologiczny i medyczny. Wykwalifikowane grono specjalistów gwarantuje, że wykonywane przez nas zabiegi będą nie tylko skuteczne, ale również przyjemne i bezpieczne. Dzięki zastosowaniu nowoczesnej aparatury możemy zapewnić najwyższą jakość oferowanych usług.
+                            </p>
                         </div>
                         <div class="button about_button">
                             <a href="#services">czytaj więcej</a>
@@ -216,7 +229,7 @@
 
                 <!-- About Image -->
                 <div class="col-lg-5">
-                    <div class="about_image"><img src="public/images/about.png" alt=""></div>
+                    <div class="about_image"><img src="{{ asset('public/images/omnie.jpg') }}" alt=""></div>
                 </div>
             </div>
         </div>
@@ -263,127 +276,32 @@
                 </div>
             </div>
             <div class="row services_row">
+                @foreach($price_categories as $price_category)
                 <!-- Pricing List -->
                 <div class="col-lg-4 col-md-4 service_col">
-                    <h2 class="pricing-header">Medycyna</h2>
-                    <div id="accordion1">
-                        <div class="card">
-                            <div class="card-header" id="headingOne1" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
-                                Kardiolog
-                            </div>
-
-                            <div id="collapseOne1" class="collapse show" aria-labelledby="headingOne1" data-parent="#accordion1">
-                                <div class="card-body">
-                                    <ul class="list-unstyled">
-                                        <li>Wizyta <span class="price">100zł</span></li>
-                                        <li class="mt-2">Echo serca <span class="price">100zł</span></li>
-                                        <li class="mt-2">Ekg <span class="price">100zł</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header collapsed" id="headingTwo1" data-toggle="collapse" data-target="#collapseTwo1" aria-expanded="false" aria-controls="collapseTwo1">
-                                Dietetyk
-                            </div>
-                            <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo1" data-parent="#accordion1">
-                                <div class="card-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header collapsed" id="headingThree1" data-toggle="collapse" data-target="#collapseThree1" aria-expanded="false" aria-controls="collapseThree1">
-                                Fizjoterapeuta
-                            </div>
-                            <div id="collapseThree1" class="collapse" aria-labelledby="headingThree1" data-parent="#accordion1">
-                                <div class="card-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Pricing List -->
-                <div class="col-lg-4 col-md-4 service_col">
-                    <h2 class="pricing-header">Kosmetologia</h2>
-                    <div id="accordion2">
-                        <div class="card">
-                            <div class="card-header" id="headingOne2" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne2">
-                                Zabieg 1
-                            </div>
-
-                            <div id="collapseOne2" class="collapse show" aria-labelledby="headingOne2" data-parent="#accordion2">
-                                <div class="card-body">
-                                    <ul class="list-unstyled">
-                                        <li>Wizyta <span class="price">100zł</span></li>
-                                        <li class="mt-2">Echo serca <span class="price">100zł</span></li>
-                                        <li class="mt-2">Ekg <span class="price">100zł</span></li>
-                                    </ul>								</div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header collapsed" id="headingTwo2" data-toggle="collapse" data-target="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
-                                Zabieg 2
-                            </div>
-                            <div id="collapseTwo2" class="collapse" aria-labelledby="headingTwo2" data-parent="#accordion2">
-                                <div class="card-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header collapsed" id="headingThree2" data-toggle="collapse" data-target="#collapseThree2" aria-expanded="false" aria-controls="collapseThree2">
-                                Zabieg 3
-                            </div>
-                            <div id="collapseThree2" class="collapse" aria-labelledby="headingThree2" data-parent="#accordion2">
-                                <div class="card-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Pricing List -->
-                <div class="col-lg-4 col-md-4 service_col">
-                    <h2 class="pricing-header">Solarium</h2>
+                    <h2 class="pricing-header">{{ $price_category->name }}</h2>
                     <div id="accordion">
+                        @foreach($price_category->price_subcategories as $price_subcategory)
                         <div class="card">
-                            <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                Zabieg 1
+                            <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapse{{ $loop->parent->index }}{{ $loop->index }}" aria-expanded="true" aria-controls="collapse{{ $loop->parent->index }}{{ $loop->index }}">
+                                {{ $price_subcategory->name }}
                             </div>
-
-                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                                <div class="card-body">
-                                    <ul class="list-unstyled">
-                                        <li>Wizyta <span class="price">100zł</span></li>
-                                        <li class="mt-2">Echo serca <span class="price">100zł</span></li>
-                                        <li class="mt-2">Ekg <span class="price">100zł</span></li>
-                                    </ul>								</div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header collapsed" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                Zabieg 2
-                            </div>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                <div class="card-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                           @if($price_subcategory->prices->count())
+                                <div id="collapse{{ $loop->parent->index }}{{ $loop->index }}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <ul class="list-unstyled">
+                                            @foreach($price_subcategory->prices as $price)
+                                                <li>{{ $price->name }} <span class="price">{{ $price->value }} zł</span></li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
+                           @endif
                         </div>
-                        <div class="card">
-                            <div class="card-header collapsed" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                Zabieg 3
-                            </div>
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                <div class="card-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -401,18 +319,13 @@
                 <div class="row services_row">
                     <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
                         <div class="carousel-inner w-100" role="listbox">
-                            <div class="carousel-item row no-gutters active">
-                                <div class="col-12 float-left col-sm-3"><img class="img-fluid" src="http://placehold.it/350x280/222/fff?text=1">Laryngologia</div>
-                                <div class="col-12 float-left col-sm-3"><img class="img-fluid" src="http://placehold.it/350x280/444?text=2">Ortopedia</div>
-                                <div class="col-12 float-left col-sm-3"><img class="img-fluid" src="http://placehold.it/350x280/888?text=3">Medycyna</div>
-                                <div class="col-12 float-left col-sm-3"><img class="img-fluid" src="http://placehold.it/350x280/111/fff?text=4">Manicure</div>
+                            @foreach($workers->chunk(4) as $chunk)
+                            <div class="carousel-item row no-gutters @if($loop->index < 1) active @endif">
+                                @foreach($chunk as $worker)
+                                    <div class="col-12 float-left col-sm-3"><img class="img-fluid" src="{{ Voyager::image($worker->image) }}"><br/>{{ $worker->name }}</div>
+                                @endforeach
                             </div>
-                            <div class="carousel-item row no-gutters">
-                                <div class="col-12 float-left col-sm-3"><img class="img-fluid" src="http://placehold.it/350x280?text=5"></div>
-                                <div class="col-12 float-left col-sm-3"><img class="img-fluid" src="http://placehold.it/350x280/555?text=6"></div>
-                                <div class="col-12 float-left col-sm-3"><img class="img-fluid" src="http://placehold.it/350x280/333/fff?text=7"></div>
-                                <div class="col-12 float-left col-sm-3"><img class="img-fluid" src="http://placehold.it/350x280/bbb?text=8"></div>
-                            </div>
+                            @endforeach
                         </div>
                         <a class="carousel-control-prev" href="#recipeCarousel" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -437,45 +350,28 @@
             </div>
             <div class="row services_row">
                 <!-- Images used to open the lightbox -->
+                @php($count = 0)
+                @foreach($images->chunk(4) as $chunk)
                 <div class="row">
-                    <div class="col-md-3">
-                        <img src="public/images/team_1.png" onclick="openModal();currentSlide(1)" class="hover-shadow">
+                    @foreach($chunk as $image)
+                    @php($count++)
+                    <div class="col-md-6">
+                        <img src="{{ Voyager::image($image->image) }}" style="width: 590px;" onclick="openModal();currentSlide(1)" class="hover-shadow">
                     </div>
-                    <div class="col-md-3">
-                        <img src="public/images/team_2.png" onclick="openModal();currentSlide(2)" class="hover-shadow">
-                    </div>
-                    <div class="col-md-3">
-                        <img src="public/images/team_3.png" onclick="openModal();currentSlide(3)" class="hover-shadow">
-                    </div>
-                    <div class="col-md-3">
-                        <img src="public/images/team_4.png" onclick="openModal();currentSlide(4)" class="hover-shadow">
-                    </div>
+                    @endforeach
                 </div>
+                @endforeach
 
                 <!-- The Modal/Lightbox -->
                 <div id="myModal" class="modal">
-                    <span class="close cursor" onclick="closeModal()">&times;</span>
+                    <span style="color: black" class="close cursor" onclick="closeModal()">&times;</span>
                     <div class="modal-content">
-
-                        <div class="mySlides">
-                            <div class="numbertext">1 / 4</div>
-                            <img class="slide" src="public/images/team_1.png" style="width:50%">
-                        </div>
-
-                        <div class="mySlides">
-                            <div class="numbertext">2 / 4</div>
-                            <img class="slide" src="public/images/team_2.png" style="width:50%">
-                        </div>
-
-                        <div class="mySlides">
-                            <div class="numbertext">3 / 4</div>
-                            <img class="slide" src="public/images/team_3.png" style="width:50%">
-                        </div>
-
-                        <div class="mySlides">
-                            <div class="numbertext">4 / 4</div>
-                            <img class="slide" src="public/images/team_4.png" style="width:50%">
-                        </div>
+                        @foreach($images as $image)
+                            <div class="mySlides">
+                                <div class="numbertext">{{ $loop->index }} / {{ $count }}</div>
+                                <img class="slide" src="{{ Voyager::image($image->image) }}" style="width:50%">
+                            </div>
+                        @endforeach
 
                         <!-- Next/previous controls -->
                         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -487,21 +383,11 @@
                         </div>
 
                         <!-- Thumbnail image controls -->
-                        <div class="column">
-                            <img class="demo"  onclick="currentSlide(1)" alt="Doktor 1">
-                        </div>
-
-                        <div class="column">
-                            <img class="demo" onclick="currentSlide(2)" alt="Doktor 2">
-                        </div>
-
-                        <div class="column">
-                            <img class="demo" onclick="currentSlide(3)" alt="Doktor 3">
-                        </div>
-
-                        <div class="column">
-                            <img class="demo"  onclick="currentSlide(4)" alt="Doktor 4">
-                        </div>
+                        @foreach($images as $image)
+                            <div class="column">
+                                <img class="demo"  onclick="currentSlide({{ $loop->index+1 }})" alt="{{ $image->name }}">
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -511,16 +397,16 @@
 
     <!-- Call to action -->
 
-    <div class="cta" style="margin-top: 80px;">
-        <div class="cta_background parallax-window" data-parallax="scroll" data-image-src="public/images/cta.jpg" data-speed="0.8"></div>
-        <div class="container">
-            <div class="row" style="color: white;">
-                <h2 class="col-md-4 text-center"><div class="counter" data-count="150">0</div>lekarzy</h2>
-                <h2 class="col-md-4 text-center"><div class="counter" data-count="750">0</div>zrealizowanych wizyt</h2>
-                <h2 class="col-md-4 text-center"><div class="counter" data-count="50">0</div>wolnych miejsc</h2>
-            </div>
-        </div>
-    </div>
+    {{--<div class="cta" style="margin-top: 80px;">--}}
+        {{--<div class="cta_background parallax-window" data-parallax="scroll" data-image-src="public/images/cta.jpg" data-speed="0.8"></div>--}}
+        {{--<div class="container">--}}
+            {{--<div class="row" style="color: white;">--}}
+                {{--<h2 class="col-md-4 text-center"><div class="counter" data-count="150">0</div>lekarzy</h2>--}}
+                {{--<h2 class="col-md-4 text-center"><div class="counter" data-count="750">0</div>zrealizowanych wizyt</h2>--}}
+                {{--<h2 class="col-md-4 text-center"><div class="counter" data-count="50">0</div>wolnych miejsc</h2>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
 
     <!-- Footer -->
 
@@ -541,10 +427,12 @@
                                 </div>
                             </div>
                             <ul class="footer_about_list">
-                                <li><i class="fa fa-phone" style="font-size: 25px;  color: #FF00BA"></i><span>+48 666 296 418</span> </li>
-                                <li><i class="far fa-envelope" style="font-size: 25px; color: #FF00BA"></i><span>adres@email.com</span> </li>
-                                <li><i class="fa fa-map-marker" style="font-size: 25px; margin-right: 7px; color: #FF00BA"></i><span>Przasnysz</span> </li>
+                                <li><i class="fa fa-phone" style="font-size: 25px;  color: #FF00BA"></i><span>+48 602 150 345</span> </li>
+                                <li><i class="far fa-envelope" style="font-size: 25px; color: #FF00BA"></i><span>cosmedic@op.pl</span> </li>
+                                <li><i class="fa fa-map-marker" style="font-size: 25px; margin-right: 7px; color: #FF00BA"></i><span>Przasnysz, ul. Mazowiecka 32</span> </li>
                             </ul>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2400.184909372469!2d20.87819321578504!3d53.01703887991134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471dd5fc6c7c0095%3A0xf9f1a3c473f1f6f8!2sCosmedic+-+uroda+i+medycyna!5e0!3m2!1spl!2spl!4v1532878521477" width="300" height="300" frameborder="0" style="border:0; margin-top: 15px;" allowfullscreen></iframe>
+
                         </div>
                     </div>
 
@@ -565,12 +453,9 @@
                         <div class="footer_links footer_column">
                             <h3 style="color: #FF00BA;">Usługi</h3>
                             <ul>
-                                <li><a href="#">Lorem Ipsum</a></li>
-                                <li><a href="#">Lorem Ipsum</a></li>
-                                <li><a href="#">Lorem Ipsum</a></li>
-                                <li><a href="#">Lorem Ipsum</a></li>
-                                <li><a href="#">Lorem Ipsum</a></li>
-                                <li><a href="#">Lorem Ipsum</a></li>
+                                @foreach($services as $service)
+                                    <li><a href="#">{{ $service->title }}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -579,7 +464,8 @@
                     <div class="col-lg-4 footer_col">
                         <div class="footer_news footer_column">
                             <div class="well well-sm">
-                                <form class="form-horizontal" action="" method="post">
+                                <form class="form-horizontal" action="{{ action('MailController@contact') }}" method="post">
+                                    @csrf
                                     <fieldset>
                                         <legend class="col-md-12 text-center" style="color: #FF00BA; margin-bottom: 30px;">Formularz kontaktowy</legend>
 
@@ -593,7 +479,7 @@
                                         <!-- Email input-->
                                         <div class="form-group">
                                             <div class="col-md-12">
-                                                <input id="email" name="email" type="text" placeholder="Adres email" class="form-control">
+                                                <input id="email" name="email" type="email" placeholder="Adres email" class="form-control">
                                             </div>
                                         </div>
 
@@ -604,9 +490,13 @@
                                             </div>
                                         </div>
 
+                                        <div class="col-md-12 @if ($errors->has('g-recaptcha-response')) has-error @endif ">
+                                            <div class="g-recaptcha" data-sitekey="6LeeB2cUAAAAAHoAOzDpZ_I6ZzZpXuqz1BjyPlxH"></div>
+                                        </div>
+
                                         <!-- Form actions -->
                                         <div class="form-group">
-                                            <div class="col-md-12 text-right">
+                                            <div class="col-md-12 text-left mt-1">
                                                 <button type="submit" style="background: #FF00BA; color: white;" class="btn">Wyślij</button>
                                             </div>
                                         </div>
@@ -626,12 +516,8 @@
                             <div class="cr" style="color: white;">Copyright &copy; 2018 Cosmedic</div>
                             <div class="footer_social ml-lg-auto">
                                 <ul>
-                                    <li><a href="#"><i class="fab fa-pinterest" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-dribbble" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-behance" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://www.instagram.com/cosmedic_przasnysz/"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://www.facebook.com/Cosmedic-1687449134875963/"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -642,6 +528,7 @@
     </footer>
 </div>
 
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <script src="public/js/jquery-3.2.1.min.js"></script>
 <script src="public/styles/bootstrap4/popper.js"></script>
 <script src="public/styles/bootstrap4/bootstrap.min.js"></script>
@@ -650,5 +537,16 @@
 <script src="public/plugins/parallax-js-master/parallax.min.js"></script>
 <script src="public/js/scrollreveal.min.js"></script>
 <script src="public/js/custom.js"></script>
+
+<script>
+    $( document ).ready(function() {
+        $('#success').fadeIn();
+        $('.super_container').fadeIn(500);
+
+    });
+    setTimeout(function(){
+        $('#success').fadeOut();
+    }, 5000);
+</script>
 </body>
 </html>

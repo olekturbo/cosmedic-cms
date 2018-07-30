@@ -1328,6 +1328,18 @@ section
 	color: #f1f1f1;
 }
 
+.sidenav-msg {
+	height: auto;
+	width: 300px;
+	position: fixed;
+	top: 0;
+	left: 3px;
+	overflow-x: hidden;
+	z-index: 100;
+	margin-top: 15%;
+}
+
+
 @media screen and (max-height: 450px) {
 	.sidenav {padding-top: 15px;}
 	.sidenav a {font-size: 18px;}

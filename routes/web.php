@@ -22,3 +22,5 @@ Route::get('/', 'WelcomeController@index')->name('welcome');
 Route::get('/panel-admina', function () {
     return redirect('public/admin');
 })->name('panel-admina');
+
+Route::post('wyslij', 'MailController@contact'); /* widok edycji */
